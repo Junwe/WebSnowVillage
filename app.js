@@ -6,7 +6,7 @@ canvas.height = window.innerHeight;
 
 const waveinfo = {
     y : canvas.height/1.5,
-    length : 0.001,
+    length : 0.01,
     amplitude : 100,
     frequency : 0.05
 }
@@ -130,7 +130,7 @@ function animate()
     increment += waveinfo.frequency;
     c.strokeStyle = "White"
     c.fillStyle = "rgb(50,50,255)"
-    //c.fill();
+    c.fill();
     c.stroke();
     
     snowObjectList.forEach(element => {
