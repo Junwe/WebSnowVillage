@@ -11,19 +11,27 @@ const waveinfo = {
     frequency : 0.05
 }
 
-const snowInfo = {
-    downSpeed : 0.01
+const windInfo = {
+    power : 0.05
 }
 
 class snow  {
     constructor()
     {
         this.dx = Math.random() * canvas.width;
-        this.dy = 100;
-        this.raidus = 1.5;
-        this.FallingSpeed = clamp(Math.random(), 0.1, 1);
+        this.dy = 0;
+        this.raidus = clamp(Math.random() * 2, 0.1, 2); ;
+        this.FallingSpeed = clamp(Math.random() * 0.5, 0.1, 0.5) * 4;
+        this.mass = clamp(Math.random() * 0.5, 0.1, 0.5);
+        this.windDirection = Math.random() <= 0.5 ? -1 : 1;
 
         this.isFlatOnGround = false;
+
+        setInterval(function(){
+            this.windDirection = Math.random() <= 0.5 ? -1 : 1;
+    
+        },1000);
+
     }
 
     FallingSnow()
@@ -44,6 +52,16 @@ class snow  {
             this.isFlatOnGround = true;
             this.dy = waveYPositionList[integerX] - this.raidus;
         }
+
+        if((this.dx - this.raidus) <= 0)
+        {
+            this.dx = this.raidus;
+        }
+
+        if((this.dx + this.raidus) >= canvas.width)
+        {
+            this.dx = canvas.width - this.raidus;
+        }
     }
 
     FlatOnGround()
@@ -52,12 +70,19 @@ class snow  {
         this.dy = waveYPositionList[integerX] - this.raidus;
     }
 
+    Flutter()
+    {
+        this.dx += this.windDirection * (windInfo.power + this.mass)
+    }
+
     Update()
     {
         if(this.isFlatOnGround == false)
         {
+            this.Flutter();
             this.FallingSnow();
             this.Collide();
+
             this.DrawSnow();
         }
         else
@@ -72,7 +97,7 @@ class snow  {
 const snowObjectList = []
 function Init()
 {
-    for(let i=0; i<100;++i)
+    for(let i=0; i<1000;++i)
     {
         snowObjectList.push(new snow());
     }
