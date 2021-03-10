@@ -27,6 +27,10 @@ class snow  {
 
         this.isFlatOnGround = false;
 
+        this.red = Math.random() * 255
+        this.green = Math.random() * 255
+        this.blue = Math.random() * 255
+
         setInterval(function(){
             this.windDirection = Math.random() <= 0.5 ? -1 : 1;
     
@@ -41,7 +45,9 @@ class snow  {
 
     DrawSnow()
     {
-        drawCircle(this.dx,this.dy,this.raidus);
+        drawCircle(this.dx,this.dy,this.raidus,
+            format('rgba({0},{1},{2})',
+            this.red,this.green,this.blue));
     }
 
     Collide()
@@ -132,19 +138,32 @@ function animate()
    
 }
 
-function drawCircle(dx,dy,raidus)
+function drawCircle(dx,dy,raidus,color)
 {
     c.beginPath();
     c.arc(dx,dy,raidus,0,2*Math.PI);
-
+    c.fillStyle = color;
+    c.strokeStyle = color;
     c.fill();
     c.stroke();
+
+    c.strokeStyle = "black"
 }
 
 function clamp(num, min, max) 
 {
     return num <= min ? min : num >= max ? max : num;
 }
+
+function format() 
+{ var args = Array.prototype.slice.call (arguments, 1); 
+    return arguments[0].replace (/\{(\d+)\}/g, function (match, index) { 
+        return args[index]; 
+    }); 
+}
+
+
+
 
 Init();
 animate();
