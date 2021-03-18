@@ -32,7 +32,7 @@ class DotObject
         this.DiminishX = getRandomArbitrary(-0.01,0.01);
         this.DiminishY = getRandomArbitrary(0.05,0.2);
 
-        this.radius = getRandomArbitrary(5,10);
+        this.radius = getRandomArbitrary(5,8);
         //this.DiminishX = getRandomArbitrary(0.1,0.2);
 
         this.x = x;
@@ -46,7 +46,7 @@ class DotObject
         this.x += this.throwPowerX;
         this.y += this.throwPowerY;
 
-        //this.radius -= 0.01;
+        this.radius -= 0.01;
         this.throwPowerX -= this.DiminishX;
         this.throwPowerY += this.DiminishY;
 
@@ -59,7 +59,11 @@ class DotObject
         c.beginPath();
         c.arc(this.x,this.y,this.radius,0,2*Math.PI);
         c.fillStyle = this.color;
+        c.shadowOffsetX = 0;
+        c.shadowOffsetY = 0;
         c.strokeStyle = this.color;
+        c.shadowColor = this.color;
+        c.shadowBlur = getRandomArbitrary(5,10);
         c.fill();
         c.stroke();
     }
@@ -132,7 +136,7 @@ function onClick(e) {
     MouseX = e.pageX - offsetX;
     MouseY = e.pageY - offsetY;
 
-    for(let i=0;i<10;++i)
+    for(let i=0;i<getRandomArbitrary(10,30);++i)
     {
         let createPositionX = MouseX + getRandomArbitrary(10,20);
         let createPositionY = MouseY + getRandomArbitrary(10,20);
