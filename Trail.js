@@ -26,11 +26,11 @@ class DotObject
     {
         // 날리는 힘.
         this.throwPowerX = getRandomArbitrary(-5,5);
-        this.throwPowerY = getRandomArbitrary(-2,-0.5);
+        this.throwPowerY = getRandomArbitrary(-4,-2);
 
         // 움직임 감소량
         this.DiminishX = getRandomArbitrary(-0.01,0.01);
-        this.DiminishY = getRandomArbitrary(0.05,0.1);
+        this.DiminishY = getRandomArbitrary(0.05,0.2);
 
         this.radius = getRandomArbitrary(5,10);
         //this.DiminishX = getRandomArbitrary(0.1,0.2);
