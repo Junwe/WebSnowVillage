@@ -6,7 +6,7 @@ canvas.height = window.innerHeight;
 
 const waveinfo = {
     y : canvas.height/1.5,
-    length : 0.001,
+    length : 0.01,
     amplitude : 100,
     frequency : 0.05
 }
@@ -20,7 +20,7 @@ class snow  {
     {
         this.dx = Math.random() * canvas.width;
         this.dy = 0;
-        this.raidus = clamp(Math.random() * 2, 0.1, 2); ;
+        this.raidus = clamp(Math.random() * 4, 0.1, 4); ;
         this.FallingSpeed = clamp(Math.random() * 0.5, 0.1, 0.5) * 4;
         this.mass = clamp(Math.random() * 0.5, 0.1, 0.5);
         this.windDirection = Math.random() <= 0.5 ? -1 : 1;
@@ -46,8 +46,7 @@ class snow  {
     DrawSnow()
     {
         drawCircle(this.dx,this.dy,this.raidus,
-            format('rgba({0},{1},{2})',
-            this.red,this.green,this.blue));
+            'White');
     }
 
     Collide()
@@ -103,7 +102,7 @@ class snow  {
 const snowObjectList = []
 function Init()
 {
-    for(let i=0; i<1000;++i)
+    for(let i=0; i<500;++i)
     {
         snowObjectList.push(new snow());
     }
@@ -129,7 +128,9 @@ function animate()
         * waveinfo.amplitude));
     }
     increment += waveinfo.frequency;
-    
+    c.strokeStyle = "White"
+    c.fillStyle = "rgb(50,50,255)"
+    c.fill();
     c.stroke();
     
     snowObjectList.forEach(element => {
